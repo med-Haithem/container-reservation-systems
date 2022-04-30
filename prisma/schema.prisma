@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+
+}
+
+model User {
+  ID           Int           @id @default(autoincrement())
+  Email        String        @unique
+  Password     String
+  Name         String?
+  Role         Role          @default(USER)
+  Camions      Camion[]
+  Reservations Reservation[]
+}
+
+model Camion {
+  ID          Int           @id @default(autoincrement())
+  matricule   String        @unique
+  User        User?         @relation(fields: [userID], references: [ID])
+  userID      Int
+  Reservation Reservation[]
+}
+
+model Reservation {
+  ID                 Int               @id @default(autoincrement())
+  Camion             Camion            @relation(fields: [CamionID], references: [ID])
+  CamionID           Int
+  User               User              @relation(fields: [UserID], references: [ID])
+  UpdatedAt          DateTime?
+  UserID             Int
+  Date               DateTime
+  Type               ReservationType
+  ContainerMatricule String
+  Status             ReservationStatus @default(PENDING)
+  Dimension          String?
+  ContainerType      String?
+  Imdg               Boolean?          @default(false)
+  Postion            String?
+  Block              String?
+
+}
+
+model Container {
+  ID        Int     @id @default(autoincrement())
+  Matricule String  @unique
+  Type      String
+  Imdg      Boolean
+  Postion   String
+  Block     String
+}
+
+enum ReservationStatus {
+  PENDING
+  RESOLVED
+  REJECTED
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ReservationType {
+  EXPORT
+  IMPORT
+}
