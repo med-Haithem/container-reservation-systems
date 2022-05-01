@@ -21,7 +21,7 @@ camionRouter.get(
 );
 
 camionRouter.delete(
-  "/",
+  "/:id",
   authGuard,
   expressCallback(camionController.deleteCamion)
 );
