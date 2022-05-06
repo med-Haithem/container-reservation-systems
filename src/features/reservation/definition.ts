@@ -24,7 +24,8 @@ export interface UpdateReservation {
 export interface GetReservationsParams {
   status?: ReservationStatus;
   type?: ReservationType;
-  userID: number;
+  userID?: number;
   skip?: number;
   take?: number;
+  isAdmin?: string;
 }

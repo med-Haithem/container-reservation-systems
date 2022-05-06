@@ -81,6 +81,10 @@ const doQueryReservations = async (params: GetReservationsParams) => {
       Type: params.type,
     };
 
+    if (params.isAdmin && params.isAdmin.toLowerCase() === "true") {
+      delete filterParams.UserID;
+    }
+
     let { skip, take } = params;
     const paginationConfig: {
       skip?: number;
