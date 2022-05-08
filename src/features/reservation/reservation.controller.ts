@@ -1,6 +1,6 @@
 import { Reservation, ReservationType, User } from "@prisma/client";
 import { Request } from "express";
-import { ErrorHandler, HTTP_STATUS_CODES } from "../../utils";
+import { ErrorHandler, HTTP_STATUS_CODES, prisma } from "../../utils";
 import { CreatreReservation, GetReservationsParams } from "./definition";
 import reservationService from "./reservation.service";
 
@@ -13,6 +13,7 @@ const creatreReservation = async (httpRequest: any) => {
     Dimension,
     Imdg,
     ContainerType,
+    Dismension,
   } = httpRequest.body;
   const date = new Date(CreationDate) || new Date().toISOString();
   const { userID } = httpRequest.user;
@@ -26,12 +27,27 @@ const creatreReservation = async (httpRequest: any) => {
       HTTP_STATUS_CODES.BAD_REQUEST
     );
   }
+
+  if (Type === "IMPORT") {
+    let container = await prisma.container.findUnique({
+      where: {
+        Matricule: ContainerMatricule,
+      },
+    });
+    if (!container) {
+      throw new ErrorHandler(
+        "Container Matricule not found",
+        HTTP_STATUS_CODES.NOT_FOUND
+      );
+    }
+  }
   let reservationData: CreatreReservation = {
     CamionID,
     Date: date,
     UserID: userID,
     Type,
     ContainerMatricule,
+    Dimension,
   };
 
   Type = (Type as ReservationType).toUpperCase();

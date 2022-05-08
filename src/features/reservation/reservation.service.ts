@@ -7,13 +7,11 @@ import {
 
 const doCreateReservation = async (reservationPayload: CreatreReservation) => {
   try {
-    console.log("reservationPayload", reservationPayload);
     const reservation = await prisma.reservation.create({
       data: reservationPayload,
     });
     return reservation;
   } catch (err) {
-    console.log("err", err);
     throw new ErrorHandler("Server Error", HTTP_STATUS_CODES.INTERNAL_SERVER);
   }
 };
@@ -54,7 +52,12 @@ const doUpdateReservation = async (
           Matricule: validReservation.ContainerMatricule,
         },
       });
-
+      if (!validReservation) {
+        throw new ErrorHandler(
+          "Containter Matricule not found",
+          HTTP_STATUS_CODES.NOT_FOUND
+        );
+      }
       updateReservation = {
         ...updateReservation,
         Block: container?.Block,
