@@ -1,5 +1,0 @@
--- AlterTable
-ALTER TABLE "Reservation" ALTER COLUMN "Dimension" DROP NOT NULL,
-ALTER COLUMN "Imdg" DROP NOT NULL,
-ALTER COLUMN "Imdg" SET DEFAULT false,
-ALTER COLUMN "ContainerType" DROP NOT NULL;

@@ -56,7 +56,7 @@ const doUpdateReservation = async (
       updateReservation = {
         ...updateReservation,
         Block: container?.Block,
-        Postion: container?.Postion,
+        Position: container?.Position,
       };
     }
 

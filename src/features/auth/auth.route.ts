@@ -13,7 +13,8 @@ authRouter.post("/register", expressCallback(userController.register));
 authRouter.get(
   "/userInfo",
   authGuard,
-  expressCallback(userController.userInfo)
+  expressCallback(userController.userInfo),
+  validatorCallback
 );
 
 export default authRouter;

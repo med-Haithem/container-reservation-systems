@@ -17,7 +17,7 @@ export interface UpdateReservation {
   ContainerMatricule: string;
   ContainerType?: string;
   Status?: ReservationStatus;
-  Postion?: string;
+  Position?: string;
   Block?: string;
 }
 

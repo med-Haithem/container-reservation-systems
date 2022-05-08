@@ -20,6 +20,7 @@ model User {
   Role         Role          @default(USER)
   Camions      Camion[]
   Reservations Reservation[]
+  Containers   Container[]
 }
 
 model Camion {
@@ -44,7 +45,7 @@ model Reservation {
   Dimension          String?
   ContainerType      String?
   Imdg               Boolean?          @default(false)
-  Postion            String?
+  Position            String?
   Block              String?
 
 }
@@ -54,8 +55,10 @@ model Container {
   Matricule String  @unique
   Type      String
   Imdg      Boolean
-  Postion   String
+  Position   String
   Block     String
+  User      User?   @relation(fields: [userID], references: [ID])
+  userID    Int?
 }
 
 enum ReservationStatus {
