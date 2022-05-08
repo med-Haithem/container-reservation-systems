@@ -24,7 +24,7 @@ containerRouter.patch(
 
 containerRouter.get(
   "/",
-  adminGuard,
+  authGuard,
   expressCallback(containerController.queryContainers)
 );
 
