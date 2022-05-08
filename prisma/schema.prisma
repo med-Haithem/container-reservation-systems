@@ -59,6 +59,7 @@ model Container {
   Block     String
   User      User?   @relation(fields: [userID], references: [ID])
   userID    Int?
+  Dimension String?
 }
 
 enum ReservationStatus {

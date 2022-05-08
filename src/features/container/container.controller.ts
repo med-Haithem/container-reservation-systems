@@ -4,7 +4,14 @@ import containerService from "./container.service";
 import { GetContainersParams } from "./definition";
 
 const createContainer = async (httpRequest: any) => {
-  const { Matricule, Type, Imdg = false, Position, Block } = httpRequest.body;
+  const {
+    Matricule,
+    Type,
+    Imdg = false,
+    Position,
+    Block,
+    Dimension,
+  } = httpRequest.body;
   const { userID } = httpRequest.user;
   try {
     const container = await containerService.doCheckContainerMatriculeExist(
@@ -23,6 +30,7 @@ const createContainer = async (httpRequest: any) => {
       Imdg,
       Position,
       Block,
+      Dimension,
     };
 
     const containerCreated = await containerService.DoCreateContainer(

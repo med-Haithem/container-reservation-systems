@@ -19,4 +19,5 @@ export interface UpdateContainer {
   Imdg: boolean;
   Position: string;
   Block: string;
+  Dimension: string;
 }

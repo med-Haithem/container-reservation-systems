@@ -45,7 +45,7 @@ const doQueryContainers = async (params: GetContainersParams) => {
     const containers = await prisma.container.findMany({
       ...paginationConfig,
     });
-    const count = await prisma.container.count({ where: whereQuery });
+    const count = await prisma.container.count();
     return { containers, count };
   } catch (err) {
     console.log("err", err);
