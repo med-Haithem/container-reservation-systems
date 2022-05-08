@@ -45,7 +45,7 @@ model Reservation {
   Dimension          String?
   ContainerType      String?
   Imdg               Boolean?          @default(false)
-  Position            String?
+  Position           String?
   Block              String?
 
 }
@@ -55,7 +55,7 @@ model Container {
   Matricule String  @unique
   Type      String
   Imdg      Boolean
-  Position   String
+  Position  String
   Block     String
   User      User?   @relation(fields: [userID], references: [ID])
   userID    Int?

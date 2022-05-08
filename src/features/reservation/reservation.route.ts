@@ -12,8 +12,7 @@ const reservationRouter = express.Router();
 reservationRouter.post(
   "/",
   authGuard,
-  expressCallback(reservationController.creatreReservation),
-  validatorCallback
+  expressCallback(reservationController.creatreReservation)
 );
 
 reservationRouter.patch(

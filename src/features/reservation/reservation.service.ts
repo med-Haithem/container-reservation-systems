@@ -7,11 +7,13 @@ import {
 
 const doCreateReservation = async (reservationPayload: CreatreReservation) => {
   try {
+    console.log("reservationPayload", reservationPayload);
     const reservation = await prisma.reservation.create({
       data: reservationPayload,
     });
     return reservation;
   } catch (err) {
+    console.log("err", err);
     throw new ErrorHandler("Server Error", HTTP_STATUS_CODES.INTERNAL_SERVER);
   }
 };
@@ -102,6 +104,7 @@ const doQueryReservations = async (params: GetReservationsParams) => {
     const count = await prisma.reservation.count({ where: filterParams });
     return { reservations, count };
   } catch (err) {
+    console.log("err");
     throw new ErrorHandler("Server Error", HTTP_STATUS_CODES.INTERNAL_SERVER);
   }
 };
