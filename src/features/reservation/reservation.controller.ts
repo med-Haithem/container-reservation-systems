@@ -13,7 +13,6 @@ const creatreReservation = async (httpRequest: any) => {
     Dimension,
     Imdg,
     ContainerType,
-    Dismension,
   } = httpRequest.body;
   const date = new Date(CreationDate) || new Date().toISOString();
   const { userID } = httpRequest.user;

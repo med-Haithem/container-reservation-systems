@@ -102,6 +102,7 @@ const doQueryReservations = async (params: GetReservationsParams) => {
     const reservations = await prisma.reservation.findMany({
       where: filterParams,
       ...paginationConfig,
+      orderBy: { ID: "desc" },
     });
 
     const count = await prisma.reservation.count({ where: filterParams });

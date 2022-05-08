@@ -44,6 +44,7 @@ const doQueryCamions = async (params: GetCamionsParams) => {
     const camions = await prisma.camion.findMany({
       where: whereQuery,
       ...paginationConfig,
+      orderBy: { ID: "desc" },
     });
     const count = await prisma.camion.count({ where: whereQuery });
     return { camions, count };
