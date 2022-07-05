@@ -20,7 +20,7 @@ const doCheckCamionReservation = async (date: Date, camionID: number) => {
   try {
     const reservation = await prisma.reservation.findFirst({
       where: {
-        Date: date,
+        Date: { gte: date, lte: new Date(date.getTime() + 60 * 60000) },
         CamionID: camionID,
       },
     });
